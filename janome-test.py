@@ -42,7 +42,7 @@ def set_word3(dic, s3):
 
 def make_sentence(head):
     ret = []
-    if head != "@": ret.append(head)
+    if head not in dic: return ""
     top = dic[head]
     w1 = word_choice(top)
     w2 = word_choice(top[w1])
@@ -118,7 +118,10 @@ async def on_message(message):
     if message:    
         text = message.content
         res = make_reply(text)
-        await message.channel.send(res)
+        if not res:
+            pass
+        else:
+            await message.channel.send(res)
 
 
 client.run(os.getenv('token'))
